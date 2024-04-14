@@ -70,27 +70,26 @@ public class Editar_Tela  extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("salvar")) {
+            String ISBN = ISBNField.getText();
             String nome = nameField.getText();
             String autor = autorField.getText();
             int ano = Integer.parseInt(anoField.getText());
             String genero = generoField.getText();
-            String ISBN = ISBNField.getText();
-            Livro novoLivro = new Livro(nome, autor, ano, genero, ISBN);
-
-            Livro livroExistente = baseDeDados.obterLivroPorTitulo(nome);
+            Livro livroExistente = baseDeDados.obterLivroPorISBN(ISBN);
             if (livroExistente != null) {
-
+                livroExistente.setNome(nome);
                 livroExistente.setAutor(autor);
                 livroExistente.setAno(ano);
                 livroExistente.setGenero(genero);
-                livroExistente.setISBN(ISBN);
+                System.out.println("Livro atualizado com sucesso!");
+                dispose();
             } else {
-                // Cria um novo livro se ele não existir no banco de dados
                 Livro novoLivro = new Livro(nome, autor, ano, genero, ISBN);
                 baseDeDados.adicionarLivro(novoLivro);
+                Livro livroCadastrado = baseDeDados.obterLivroPorTitulo(nome);
+                System.out.println("Livro Cadastrado: " + livroCadastrado.getTitulo());
             }
 
-            // Limpa os campos após salvar ou atualizar
             nameField.setText("");
             autorField.setText("");
             anoField.setText("");
