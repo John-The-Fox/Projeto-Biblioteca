@@ -10,11 +10,9 @@ public class Editar_Tela  extends JFrame implements ActionListener {
 
     private Banco_de_dados_Livros baseDeDados;
 
-    public Editar_Tela(String nome, String autor, int ano, String genero, String ISBN) {
+    public Editar_Tela(String nome, String autor, int ano, String genero, String ISBN,Banco_de_dados_Livros baseDeDados) {
         super("Dados do livro");
-
-        baseDeDados = new Banco_de_dados_Livros();
-
+        this.baseDeDados = baseDeDados;
         nameLabel = new JLabel("Nome:");
         autorLabel = new JLabel("Autor:");
         anoLabel = new JLabel("Ano:");
@@ -89,15 +87,11 @@ public class Editar_Tela  extends JFrame implements ActionListener {
                 Livro livroCadastrado = baseDeDados.obterLivroPorTitulo(nome);
                 System.out.println("Livro Cadastrado: " + livroCadastrado.getTitulo());
             }
-
-            nameField.setText("");
-            autorField.setText("");
-            anoField.setText("");
-            generoField.setText("");
-            ISBNField.setText("");
-
+            dispose();
+            new Pesquisa_Tela(baseDeDados).setVisible(true);
         } else if (e.getActionCommand().equals("cancelar")) {
             dispose();
+            new Pesquisa_Tela(baseDeDados).setVisible(true);
         }
     }
 }

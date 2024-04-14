@@ -10,7 +10,7 @@ public class Livro {
     private String autor;
     private int ano;
     private String genero;
-    private String ISBN;
+    private final String ISBN;
 
     public String getTitulo() {
         return nome;
@@ -27,9 +27,7 @@ public class Livro {
     public int getAno() {
         return ano;
     }
-    public void setISBN(String ISBN) {
-        this.ISBN = ISBN;
-    }
+
     public void setAutor(String autor) {
         this.autor = autor;
     }
